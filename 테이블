@@ -1,0 +1,22 @@
+/*********************************
+스프링 시큐리티 커스텀을 위한 테이블 생성
+*********************************/
+create table security_admin (
+    user_id varchar2(30) primary key,
+    user_pw varchar2(30) not null,
+    authority varchar2(20) default 'ROLE_USER',
+    enabled number(1) default 1
+);
+/*
+    authority : 사용자의 권한 설정
+    enabled : booleanr값으로 계정의 활성화 여부를 나타낸다.
+*/
+insert into security_admin 
+    values ('kosmo_user1', '1234', 'ROLE_USER', 1);
+insert into security_admin 
+    values ('kosmo_user2', '1234', 'ROLE_USER', 0);    
+insert into security_admin 
+    values ('kosmo_admin1', '1234', 'ROLE_ADMIN', 1);    
+insert into security_admin 
+    values ('kosmo_admin2', '1234', 'ROLE_ADMIN', 0);   
+commit;
