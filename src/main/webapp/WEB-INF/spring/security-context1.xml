@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd">
+
+	<!-- 스프링 시큐리티 1단계 : 기본페이지 사용하기 -->
+	<security:http>
+		<!-- 로그인을 통해 USER권한을 획득해야 접속할수있는 경로를 설정한다. -->
+		<security:intercept-url pattern="/security1-1/**"
+			access="hasRole('USER')"/>
+		<!-- 권한없이 누구나 접근가능한 경로를 설정한다. -->
+		<security:intercept-url pattern="/**" access="permitAll"/>
+		
+		<!-- 로그인폼과 로그아웃을 기본설정 그대로 사용한다. -->
+		<security:form-login />
+		<security:logout />
+	</security:http>
+	<!-- 권한설정을 위한 엘리먼트 -->
+	<security:authentication-manager>
+		<security:authentication-provider>
+			<security:user-service>
+				<security:user name="kosmo" password="1234" 
+				authorities="ROLE_USER" />
+			</security:user-service>
+		</security:authentication-provider>
+	</security:authentication-manager>
+		
+</beans>
